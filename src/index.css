@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.MuiInputBase-input {
+  height: 5px !important;
+  padding: 10px;
+}
