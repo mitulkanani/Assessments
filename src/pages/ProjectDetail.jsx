@@ -1,15 +1,23 @@
+// ProjectDetail.js
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import { useParams, useNavigate } from "react-router-dom";
 import ProjectForm from "../components/ProjectForm";
 import Container from "../components/Container";
 import { toast } from "react-toastify";
+import { updateProject } from "../Redux/slice/ProjectSlice";
 
 const ProjectDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [project, setProject] = useState(null);
+  const dispatch = useDispatch();
+
+  // Get project data from Redux store
+  const project = useSelector((state) =>
+    state.projects.projects.find((project) => project.id === id)
+  );
+
   const [inputValue, setInputValue] = useState("");
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -19,22 +27,15 @@ const ProjectDetail = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/projects/${id}`)
-      .then((response) => {
-        const { name, startDate, endDate, description, projectManager } =
-          response.data;
-        setProject(response.data);
-        setInputValue(name);
-        setStartDate(new Date(startDate));
-        setEndDate(new Date(endDate));
-        setDescription(description);
-        setProjectManager(projectManager);
-      })
-      .catch((error) => {
-        console.error("Error fetching project details:", error);
-      });
-  }, [id]);
+    if (project) {
+      const { name, startDate, endDate, description, projectManager } = project;
+      setInputValue(name);
+      setStartDate(new Date(startDate));
+      setEndDate(new Date(endDate));
+      setDescription(description);
+      setProjectManager(projectManager);
+    }
+  }, [project]);
 
   const validateForm = () => {
     const newErrors = {};
@@ -66,6 +67,7 @@ const ProjectDetail = () => {
     if (validateForm()) {
       setIsLoading(true);
       const updatedProject = {
+        id, // Use the current project ID to update
         name: inputValue,
         startDate: startDate.toISOString().split("T")[0],
         endDate: endDate.toISOString().split("T")[0],
@@ -73,18 +75,11 @@ const ProjectDetail = () => {
         projectManager,
       };
 
-      axios
-        .put(`http://localhost:5000/projects/${id}`, updatedProject)
-        .then(() => {
-          setIsLoading(false);
-          toast.success("Update Successful");
-          navigate("/");
-        })
-        .catch((error) => {
-          toast.error("Error while updating Project");
-          console.error("Error updating project:", error);
-          setIsLoading(false);
-        });
+      dispatch(updateProject(updatedProject));
+
+      setIsLoading(false);
+      toast.success("Update Successful");
+      navigate("/");
     }
   };
 

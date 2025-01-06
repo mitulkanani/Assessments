@@ -1,26 +1,23 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
+// Home.js
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import Container from "../components/Container";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { setProjects } from "../Redux/slice/ProjectSlice";
+import { dummyProjects } from "../constant/ProjectsData";
 
 const Home = () => {
-  const [projects, setProjects] = useState([]);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const projects = useSelector((state) => state.projects.projects);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/projects")
-      .then((response) => {
-        setProjects(response.data);
-      })
-      .catch((error) => {
-        toast.error("Error while Fetching Data");
-        console.error("Error fetching projects:", error);
-      });
-  }, []);
+    if (!projects || projects.length === 0) {
+      dispatch(setProjects(dummyProjects));
+    }
+  }, [dispatch, projects]);
 
   const handleEditClick = (id) => {
     navigate(`/projectDetail/${id}`);

@@ -6,6 +6,9 @@ import styled from "styled-components";
 import Home from "./pages/Home.jsx";
 import ProjectDetail from "./pages/ProjectDetail.jsx";
 import { ToastContainer } from "react-toastify";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor, store } from "./Redux/store.js";
 
 const AppContainer = styled.div`
   display: flex;
@@ -26,19 +29,23 @@ const App = () => {
   };
 
   return (
-    <Router>
-      <AppContainer>
-        <Sidebar isOpen={isSidebarOpen} />
-        <MainContent>
-          <Navbar toggleSidebar={toggleSidebar} />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/projectDetail/:id" element={<ProjectDetail />} />
-          </Routes>
-        </MainContent>
-      </AppContainer>
-      <ToastContainer />
-    </Router>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <AppContainer>
+            <Sidebar isOpen={isSidebarOpen} />
+            <MainContent>
+              <Navbar toggleSidebar={toggleSidebar} />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/projectDetail/:id" element={<ProjectDetail />} />
+              </Routes>
+            </MainContent>
+          </AppContainer>
+          <ToastContainer />
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 };
 
