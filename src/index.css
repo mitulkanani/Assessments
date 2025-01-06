@@ -3,6 +3,39 @@
 @tailwind utilities;
 
 .MuiInputBase-input {
-  height: 5px !important;
+  height: 8px !important;
   padding: 10px;
+}
+
+.MuiFormControl-root {
+  width: 100% !important;
+}
+
+.allowRowEvents {
+  width: 100% !important;
+}
+
+.fvuZVs .sc-jHbxoU {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  padding: 10px 0;
+}
+
+/**** react Table styles  */
+
+.react-data-table-component {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.react-data-table-component .rdt_Table {
+  border: 1px solid #ddd;
+}
+
+.react-data-table-component .rdt_TableHeader {
+  background-color: #f4f4f4;
+}
+
+.react-data-table-component .rdt_TableRow:hover {
+  background-color: #f0f0f0;
 }

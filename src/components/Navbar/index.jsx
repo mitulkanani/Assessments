@@ -1,39 +1,44 @@
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-const NavbarContainer = styled.div`
-  background-color: #34495e;
-  color: white;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const NavbarTitle = styled.h1`
-  font-size: 24px;
-  margin: 0;
-`;
-
-const HamburgerIcon = styled.div`
-  display: none;
-  cursor: pointer;
-  font-size: 30px;
-  @media (max-width: 768px) {
-    display: block;
-  }
-`;
+import PropTypes from "prop-types";
+import { Avatar, IconButton, InputBase } from "@mui/material";
+import { ChevronLeft, Search } from "lucide-react";
+import { useLocation } from "react-router-dom";
+import {
+  FlexContainer,
+  HamburgerIcon,
+  NavbarContainer,
+  SearchContainer,
+} from "./StyleNavbar";
 
 const Navbar = ({ toggleSidebar }) => {
+  const location = useLocation();
+
+  const isProjectDetailPage = location.pathname.includes("projectDetail");
+
   return (
     <NavbarContainer>
-      <NavbarTitle>My App</NavbarTitle>
-      <HamburgerIcon onClick={toggleSidebar}>
-        &#9776; {/* Hamburger icon */}
-      </HamburgerIcon>
+      {isProjectDetailPage && (
+        <ChevronLeft
+          onClick={() => window.history.back()}
+          className="cursor-pointer"
+        />
+      )}
+      <FlexContainer>
+        <SearchContainer>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search Google Maps"
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+          <IconButton type="button" sx={{ p: "10px" }} aria-label="search">
+            <Search className="h-4 w-4" />
+          </IconButton>
+        </SearchContainer>
+        <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+      </FlexContainer>
+      <HamburgerIcon onClick={toggleSidebar}>&#9776;</HamburgerIcon>
     </NavbarContainer>
   );
 };
-
 
 Navbar.propTypes = {
   toggleSidebar: PropTypes.bool.isRequired,

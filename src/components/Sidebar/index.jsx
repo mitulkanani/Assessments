@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const SidebarContainer = styled.div`
   width: 280px;
@@ -16,7 +16,8 @@ const SidebarContainer = styled.div`
   height: 100vh;
   transition: transform 0.3s ease-in-out;
   @media (max-width: 768px) {
-    transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+    transform: ${({ isOpen }) =>
+      isOpen ? "translateX(0)" : "translateX(-100%)"};
   }
 `;
 
@@ -33,7 +34,7 @@ const SidebarOption = styled.div`
   font-size: 18px;
   margin: 5px 0;
   cursor: pointer;
-  background-color: ${({ isActive }) => (isActive ? '#34495e' : 'transparent')};
+  background-color: ${({ isActive }) => (isActive ? "#34495e" : "transparent")};
   &:hover {
     background-color: #34495e;
   }
@@ -61,13 +62,12 @@ const Sidebar = ({ isOpen }) => {
         <SidebarOption isActive={isActiveTab === 0}>Project A</SidebarOption>
       </SidebarLink>
 
-      <SidebarLink to="/ProjectDetail" onClick={() => handleTabClick(1)}>
+      <SidebarLink onClick={() => handleTabClick(1)}>
         <SidebarOption isActive={isActiveTab === 1}>Project B</SidebarOption>
       </SidebarLink>
     </SidebarContainer>
   );
 };
-
 
 Sidebar.propTypes = {
   isOpen: PropTypes.bool.isRequired,
