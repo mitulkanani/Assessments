@@ -48,30 +48,33 @@ const SidebarLink = styled(Link)`
   width: 100%;
 `;
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [isActiveTab, setIsActiveTab] = useState(0); // Tracks which tab is active
 
   const handleTabClick = (index) => {
-    setIsActiveTab(index); // Update active tab
+    setIsActiveTab(index);
+    toggleSidebar(); // Call the toggleSidebar function passed as prop
   };
 
   return (
     <SidebarContainer isOpen={isOpen}>
       <SidebarHeading>Favorite Projects</SidebarHeading>
 
-      <SidebarLink to="/" onClick={() => handleTabClick(0)}>
+      <SidebarLink to="/" onClick={() => { handleTabClick(0) }}>
         <SidebarOption isActive={isActiveTab === 0}>Project A</SidebarOption>
       </SidebarLink>
 
-      <SidebarLink onClick={() => handleTabClick(1)}>
+      <SidebarLink to="/EmptyProduct"  onClick={() => { handleTabClick(1) }}>
         <SidebarOption isActive={isActiveTab === 1}>Project B</SidebarOption>
       </SidebarLink>
     </SidebarContainer>
   );
 };
 
+// PropTypes definition
 Sidebar.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isOpen: PropTypes.bool.isRequired, // Boolean indicating if the sidebar is open
+  toggleSidebar: PropTypes.func.isRequired, // Function to toggle the sidebar
 };
 
 export default Sidebar;

@@ -9,6 +9,7 @@ import { ToastContainer } from "react-toastify";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./Redux/store.js";
+import EmptyProduct from "./pages/EmptyProduct.jsx";
 
 const AppContainer = styled.div`
   display: flex;
@@ -28,17 +29,19 @@ const App = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Router>
           <AppContainer>
-            <Sidebar isOpen={isSidebarOpen} />
+            <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             <MainContent>
               <Navbar toggleSidebar={toggleSidebar} />
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/projectDetail/:id" element={<ProjectDetail />} />
+                <Route path="/EmptyProduct" element={<EmptyProduct />} />
               </Routes>
             </MainContent>
           </AppContainer>

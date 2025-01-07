@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setProjects } from "../Redux/slice/ProjectSlice";
 import { dummyProjects } from "../constant/ProjectsData";
-import useWindowSize from "../useWindowSize";
+import useWindowSize from "../hooks/useWindowSize";
 
 const Home = () => {
   const dispatch = useDispatch();
