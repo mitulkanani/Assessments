@@ -13,6 +13,7 @@ const SidebarContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 9999;
   height: 100vh;
   transition: transform 0.3s ease-in-out;
   @media (max-width: 768px) {

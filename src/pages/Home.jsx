@@ -7,11 +7,13 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { setProjects } from "../Redux/slice/ProjectSlice";
 import { dummyProjects } from "../constant/ProjectsData";
+import useWindowSize from "../useWindowSize";
 
 const Home = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const projects = useSelector((state) => state.projects.projects);
+  const {width} = useWindowSize()
 
   useEffect(() => {
     if (!projects || projects.length === 0) {
@@ -37,11 +39,13 @@ const Home = () => {
     {
       name: "Start Date",
       selector: (data) => <div>{data.startDate}</div>,
+      omit: width < 768,
       grow: 1,
     },
     {
       name: "End Date",
       selector: (data) => <div>{data.endDate}</div>,
+      omit: width < 768,
       grow: 1,
     },
     {

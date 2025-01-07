@@ -67,7 +67,7 @@ const ProjectDetail = () => {
     if (validateForm()) {
       setIsLoading(true);
       const updatedProject = {
-        id, // Use the current project ID to update
+        id,
         name: inputValue,
         startDate: startDate.toISOString().split("T")[0],
         endDate: endDate.toISOString().split("T")[0],

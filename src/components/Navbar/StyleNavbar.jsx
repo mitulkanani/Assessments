@@ -9,17 +9,21 @@ export const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+    @media (max-width: 768px) {
+     justify-content: end;
+  }
 `;
 
 export const NavbarTitle = styled.h1`
   font-size: 24px;
   margin: 0;
-`;
+`; 
 
 export const HamburgerIcon = styled.div`
   display: none;
   cursor: pointer;
   font-size: 30px;
+  margin: 0 10px;
   @media (max-width: 768px) {
     display: block;
   }
@@ -27,8 +31,6 @@ export const HamburgerIcon = styled.div`
 
 export const SearchContainer = styled.div`
   max-width: 300px;
-  my-2;
-  px-3;
   display: flex;
   background-color: #f5f5f5;
   border-radius: 50px;
@@ -42,4 +44,7 @@ export const FlexContainer = styled.div`
   justify-content: flex-end;
   width: 100%;
   gap: 20px;
+  @media (max-width: 768px) {
+    display: none !important;
+  }
 `;

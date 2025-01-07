@@ -15,8 +15,10 @@ const TextInputField = ({ label, value, onChange, error }) => {
             error={error}
             onChange={onChange}
           />
+        {/* {error && <p className="text-red-400 text-xs">This Field is Required</p>} */}
         </div>
       </div>
+      
     </>
   );
 };

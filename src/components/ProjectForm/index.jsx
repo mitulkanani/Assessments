@@ -27,7 +27,7 @@ const ProjectForm = ({
   return (
     <FormContainer>
       <ProjectIdContainer>
-        <LabelComponent label="Project ID" />
+        <LabelComponent label="Project ID"  className='mr-2' />
         <ProjectId>{project.id}</ProjectId>
       </ProjectIdContainer>
 
@@ -62,7 +62,7 @@ const ProjectForm = ({
       </TextInputFieldContainer>
 
       <DescriptionContainer>
-        <LabelComponent label="Description" />
+        <LabelComponent label="Description" className='mr-2' />
         <DescriptionTextarea
           value={description}
           onChange={handleDescriptionChange}
