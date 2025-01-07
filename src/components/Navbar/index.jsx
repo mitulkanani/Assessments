@@ -15,11 +15,11 @@ const Navbar = ({ toggleSidebar }) => {
   const isProjectDetailPage = location.pathname.includes("projectDetail");
 
   return (
-    <NavbarContainer>
+    <NavbarContainer className={`flex justify-between`}>
       {isProjectDetailPage && (
         <ChevronLeft
           onClick={() => window.history.back()}
-          className="cursor-pointer"
+          className="cursor-pointer absolute left-5"
         />
       )}
       <FlexContainer>
